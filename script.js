@@ -71,7 +71,7 @@ mobileNavLinks.forEach(link => {
 
 // Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
@@ -147,7 +147,7 @@ filterBtns.forEach(btn => {
 // Contact Form
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const formData = new FormData(this);
 
@@ -171,6 +171,36 @@ if (contactForm) {
         }, 1500);
     });
 }
+
+// Social QR Code Popup
+const socialLinks = document.querySelectorAll('.social-link[data-social]');
+socialLinks.forEach(link => {
+    const socialType = link.dataset.social;
+    const socialConfig = config.socialLinks[socialType];
+
+    if (socialConfig) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'social-link-wrapper';
+        link.parentNode.insertBefore(wrapper, link);
+        wrapper.appendChild(link);
+
+        const popup = document.createElement('div');
+        popup.className = 'social-qr-popup';
+        popup.innerHTML = `
+            <img src="${socialConfig.qrCode}" alt="${socialConfig.name}二维码">
+            <span>扫码添加${socialConfig.name}</span>
+        `;
+        wrapper.appendChild(popup);
+
+        link.addEventListener('mouseenter', () => {
+            popup.classList.add('show');
+        });
+
+        link.addEventListener('mouseleave', () => {
+            popup.classList.remove('show');
+        });
+    }
+});
 
 // Parallax Effect on Hero Circle
 window.addEventListener('mousemove', (e) => {

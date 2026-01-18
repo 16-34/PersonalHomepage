@@ -1,5 +1,6 @@
 .DS_Store
 
-prompt.md
-
 .vscode/
+
+prompt.md
+config/
