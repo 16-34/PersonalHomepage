@@ -398,6 +398,10 @@ body {
 /* Sections */
 .section {
     padding: 8rem 3rem;
+    max-width: 100%;
+}
+
+.section-inner {
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -428,6 +432,8 @@ body {
     grid-template-columns: 1fr 1.5fr;
     gap: 5rem;
     align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .about-image-wrapper {
@@ -464,11 +470,12 @@ body {
 
 .about-image-bg {
     position: absolute;
-    top: 2rem;
-    left: 2rem;
-    right: -2rem;
-    bottom: -2rem;
+    top: 1rem;
+    left: 1rem;
+    right: -1rem;
+    bottom: -1rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: -1;
 }
 
 .about-text .lead {
@@ -523,13 +530,7 @@ body {
     transition: width 1.5s ease;
 }
 
-/* Works Section */
-.works-filter {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
+/* Filter Buttons */
 .filter-btn {
     background: none;
     border: none;
@@ -540,6 +541,7 @@ body {
     letter-spacing: 1px;
     transition: var(--transition-fast);
     position: relative;
+    padding: 0.5rem 0;
 }
 
 .filter-btn::after {
@@ -563,10 +565,22 @@ body {
     width: 100%;
 }
 
+/* Works Section */
+.works-filter {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .works-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .work-card {
@@ -656,7 +670,9 @@ body {
 /* Experience Section */
 .experience-timeline {
     position: relative;
-    padding-left: 4rem;
+    padding-left: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .experience-timeline::before {
@@ -672,6 +688,8 @@ body {
 .experience-item {
     position: relative;
     padding-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .experience-item:last-child {
@@ -679,28 +697,32 @@ body {
 }
 
 .experience-year {
-    position: absolute;
-    left: -5rem;
-    top: 0;
-    font-size: 0.75rem;
+    position: relative;
+    font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 1px;
     color: var(--gray-500);
-    width: 4rem;
-    text-align: right;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
 }
 
-.experience-line {
+.experience-year::before {
+    content: '';
     position: absolute;
-    left: -4rem;
-    top: 0.5rem;
-    width: 3rem;
-    height: 1px;
-    background: var(--gray-700);
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: var(--black);
+    border: 1px solid var(--gray-600);
+    border-radius: 50%;
 }
 
 .experience-content {
-    padding-left: 2rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--gray-800);
+    padding-left: 1.5rem;
 }
 
 .experience-role {
@@ -726,6 +748,8 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .contact-lead {
@@ -1011,7 +1035,7 @@ body {
     }
 
     .experience-timeline {
-        padding-left: 2rem;
+        padding-left: 1.5rem;
     }
 
     .experience-timeline::before {
@@ -1023,15 +1047,11 @@ body {
         left: 0;
         text-align: left;
         margin-bottom: 0.5rem;
-    }
-
-    .experience-line {
-        left: -2rem;
-        width: 1.5rem;
+        padding-left: 1.5rem;
     }
 
     .experience-content {
-        padding-left: 0;
+        padding-left: 1.5rem;
     }
 
     .footer-content {
