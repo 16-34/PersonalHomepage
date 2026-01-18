@@ -1,3 +1,65 @@
+// Initialize config-based content
+function initConfig() {
+    // Personal info
+    const heroEyebrow = document.getElementById('heroEyebrow');
+    const heroDescription = document.getElementById('heroDescription');
+    const contactEmail = document.getElementById('contactEmail');
+
+    if (config.personalInfo) {
+        if (heroEyebrow) heroEyebrow.textContent = config.personalInfo.name;
+        if (heroDescription) heroDescription.textContent = config.personalInfo.description;
+        if (contactEmail) {
+            contactEmail.textContent = config.personalInfo.email;
+            contactEmail.href = 'mailto:' + config.personalInfo.email;
+        }
+    }
+
+    // Social links
+    const contactSocial = document.getElementById('contactSocial');
+    if (contactSocial && config.socialLinks) {
+        Object.keys(config.socialLinks).forEach(key => {
+            const social = config.socialLinks[key];
+            const link = document.createElement('a');
+            link.href = social.url || '#';
+            link.className = 'social-link';
+            if (social.qrCode) {
+                link.dataset.social = key;
+            }
+            link.innerHTML = `
+                <span>${social.name}</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+            `;
+            contactSocial.appendChild(link);
+
+            // Add QR popup for social links with qrCode
+            if (social.qrCode) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'social-link-wrapper';
+                link.parentNode.insertBefore(wrapper, link);
+                wrapper.appendChild(link);
+
+                const popup = document.createElement('div');
+                popup.className = 'social-qr-popup';
+                popup.innerHTML = `
+                    <img src="${social.qrCode}" alt="${social.name}二维码">
+                    <span>扫码添加${social.name}</span>
+                `;
+                wrapper.appendChild(popup);
+
+                link.addEventListener('mouseenter', () => {
+                    popup.classList.add('show');
+                });
+
+                link.addEventListener('mouseleave', () => {
+                    popup.classList.remove('show');
+                });
+            }
+        });
+    }
+}
+
 // Custom Cursor
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
@@ -172,36 +234,6 @@ if (contactForm) {
     });
 }
 
-// Social QR Code Popup
-const socialLinks = document.querySelectorAll('.social-link[data-social]');
-socialLinks.forEach(link => {
-    const socialType = link.dataset.social;
-    const socialConfig = config.socialLinks[socialType];
-
-    if (socialConfig) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'social-link-wrapper';
-        link.parentNode.insertBefore(wrapper, link);
-        wrapper.appendChild(link);
-
-        const popup = document.createElement('div');
-        popup.className = 'social-qr-popup';
-        popup.innerHTML = `
-            <img src="${socialConfig.qrCode}" alt="${socialConfig.name}二维码">
-            <span>扫码添加${socialConfig.name}</span>
-        `;
-        wrapper.appendChild(popup);
-
-        link.addEventListener('mouseenter', () => {
-            popup.classList.add('show');
-        });
-
-        link.addEventListener('mouseleave', () => {
-            popup.classList.remove('show');
-        });
-    }
-});
-
 // Parallax Effect on Hero Circle
 window.addEventListener('mousemove', (e) => {
     const circle = document.querySelector('.hero-circle');
@@ -229,5 +261,6 @@ magneticBtns.forEach(btn => {
 
 // Initialize on load
 window.addEventListener('load', () => {
+    initConfig();
     document.body.style.opacity = '1';
 });
