@@ -882,17 +882,11 @@ body {
 }
 
 .social-qr-popup img {
-    width: 120px;
-    height: 120px;
+    width: auto;
+    height: auto;
+    max-width: 250px;
     display: block;
     border-radius: 4px;
-    margin-bottom: 8px;
-}
-
-.social-qr-popup span {
-    color: var(--black);
-    font-size: 0.75rem;
-    font-weight: 500;
 }
 
 .social-link-wrapper {

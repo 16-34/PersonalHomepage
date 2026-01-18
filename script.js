@@ -19,12 +19,8 @@ function initConfig() {
     if (contactSocial && config.socialLinks) {
         Object.keys(config.socialLinks).forEach(key => {
             const social = config.socialLinks[key];
-            const link = document.createElement('a');
-            link.href = social.url || '#';
+            const link = document.createElement('span');
             link.className = 'social-link';
-            if (social.qrCode) {
-                link.dataset.social = key;
-            }
             link.innerHTML = `
                 <span>${social.name}</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -44,7 +40,6 @@ function initConfig() {
                 popup.className = 'social-qr-popup';
                 popup.innerHTML = `
                     <img src="${social.qrCode}" alt="${social.name}二维码">
-                    <span>扫码添加${social.name}</span>
                 `;
                 wrapper.appendChild(popup);
 
