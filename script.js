@@ -19,7 +19,12 @@ function initConfig() {
     if (contactSocial && config.socialLinks) {
         Object.keys(config.socialLinks).forEach(key => {
             const social = config.socialLinks[key];
-            const link = document.createElement('span');
+            const isClickable = social.url && !social.qrCode;
+            const element = isClickable ? 'a' : 'span';
+            const link = document.createElement(element);
+            if (isClickable) {
+                link.href = social.url;
+            }
             link.className = 'social-link';
             link.innerHTML = `
                 <span>${social.name}</span>
