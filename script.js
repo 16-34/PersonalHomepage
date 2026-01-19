@@ -1,13 +1,18 @@
 // Initialize config-based content
 function initConfig() {
     // Personal info
-    const heroEyebrow = document.getElementById('heroEyebrow');
-    const heroDescription = document.getElementById('heroDescription');
+    const heroAvatar = document.getElementById('heroAvatar');
+    const heroNickname = document.getElementById('heroNickname');
+    const heroOccupation = document.getElementById('heroOccupation');
     const contactEmail = document.getElementById('contactEmail');
 
     if (config.personalInfo) {
-        if (heroEyebrow) heroEyebrow.textContent = config.personalInfo.name;
-        if (heroDescription) heroDescription.textContent = config.personalInfo.description;
+        if (heroAvatar && config.personalInfo.avatar_url) {
+            heroAvatar.src = config.personalInfo.avatar_url;
+            heroAvatar.style.display = 'block';
+        }
+        if (heroNickname) heroNickname.textContent = config.personalInfo.nickname;
+        if (heroOccupation) heroOccupation.textContent = config.personalInfo.occupation;
         if (contactEmail) {
             contactEmail.textContent = config.personalInfo.email;
             contactEmail.href = 'mailto:' + config.personalInfo.email;
