@@ -7,8 +7,8 @@ function initConfig() {
     const contactEmail = document.getElementById('contactEmail');
 
     if (config.personalInfo) {
-        if (heroAvatar && config.personalInfo.avatar_url) {
-            heroAvatar.src = config.personalInfo.avatar_url;
+        if (heroAvatar && config.personalInfo.avatar) {
+            heroAvatar.src = config.personalInfo.avatar;
             heroAvatar.style.display = 'block';
         }
         if (heroNickname) heroNickname.textContent = config.personalInfo.nickname;
